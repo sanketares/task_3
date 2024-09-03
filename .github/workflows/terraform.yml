@@ -3,7 +3,7 @@ name: Terraform
 on:
   push:
     branches:
-      - main
+      - sanket
   pull_request:
     branches:
       - main
