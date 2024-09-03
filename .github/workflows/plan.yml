@@ -64,7 +64,6 @@ jobs:
         if: success() && github.event_name == 'push'
         uses: devops-infra/action-pull-request@v0.5.1
         with:
-          source_branch: ${{ github.ref_name }}
           target_branch: main
           pr_title: "Automated PR: Terraform Plan Successful"
           pr_body: |
