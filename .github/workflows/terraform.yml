@@ -33,7 +33,7 @@ jobs:
         uses: actions/download-artifact@v3
         with:
           name: terraform-plan
-          path: ./terraform-paln
+          path: /home/runner/work/_temp/0e04ce34-79d0-4d4e-9185-7fbacfc12ef1
 
       - name: Terraform Apply
         run: terraform apply -auto-approve ./downloaded-plan/plan.out
