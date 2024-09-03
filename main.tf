@@ -16,7 +16,7 @@ resource "aws_instance" "my_instance-test" {
 
 
 resource "aws_instance" "my_instance-added" {
-  ami           = data.aws_ami.redhat.id
+  ami           = "ami-053b0d53c279acc90"
   instance_type = "t2.micro"          
   subnet_id     = aws_subnet.my_subnet.id
 
