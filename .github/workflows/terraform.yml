@@ -42,6 +42,13 @@ jobs:
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+                
+      - name: Check Terraform Plan
+        if: failure()
+        run: |
+          echo "Terraform plan failed. Check the logs for more details."
+          exit 1
+
 
       - name: Upload Terraform Plan Artifacts
         if: success()
@@ -61,8 +68,3 @@ jobs:
           body: |
             This pull request was automatically created after a successful Terraform plan.
 
-      - name: Check Terraform Plan
-        if: failure()
-        run: |
-          echo "Terraform plan failed. Check the logs for more details."
-          exit 1
