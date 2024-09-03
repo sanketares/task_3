@@ -60,12 +60,6 @@ jobs:
           path: plan.out
           
       - name: Create Pull Request
-        if: success()
-        uses: peter-evans/create-pull-request@v4
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-          base: main
-          branch: sanket
-          title: 'Terraform Plan Results'
+
 
 
