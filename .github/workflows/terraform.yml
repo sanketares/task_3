@@ -37,14 +37,7 @@ jobs:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
 
-      - name: Delete Existing Plan File
-        run: |
-          if [ -f plan.out ]; then
-            echo "Deleting existing plan.out"
-            rm plan.out
-          else
-            echo "No existing plan.out file found"
-          fi
+
 
       - name: Terraform Plan
         run: terraform plan -out=plan.out
