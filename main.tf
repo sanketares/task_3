@@ -4,10 +4,9 @@ provider "aws" {
 
 
 
-resource "aws_instance" "my_instance" {
-  ami           = data.aws_ami.redhat.id
-  instance_type = "t2.micro"               # Instance type
-  subnet_id     = aws_subnet.my_subnet.id
+resource "aws_instance" "my_instance-test" {
+  ami           = "ami-053b0d53c279acc90"
+  instance_type = "t2.micro"              
 
 
   tags = {
