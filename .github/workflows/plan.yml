@@ -69,8 +69,7 @@ jobs:
           pr_title: "Automated PR: Terraform Plan Successful"
           pr_body: |
             This pull request was automatically created because the Terraform plan was successful.
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+ 
 
 
 
