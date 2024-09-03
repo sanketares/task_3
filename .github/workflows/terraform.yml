@@ -1,18 +1,17 @@
-name: Terraform Apply 
+name: Terraform Workflow
 
 on:
   push:
     branches:
       - main
+      - sanket
   pull_request:
     branches:
       - main
 
-
 jobs:
-  terraform-apply:
+  terraform-plan:
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
@@ -28,16 +27,38 @@ jobs:
           sudo apt-get install -y awscli
           aws configure set aws_access_key_id ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws configure set aws_secret_access_key ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          aws configure set default.region us-east-1 # Set to your desired region
+          aws configure set default.region us-east-1
           echo "check aws cli identity"
           aws sts get-caller-identity
 
-
-
-      - name: Terraform Apply
-        run: terraform apply -auto-approve ./plan.out
+      - name: Terraform Init
+        run: terraform init
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+
+
+
+
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+                
+      - name: Check Terraform Plan
+        if: failure()
+        run: |
+          echo "Terraform plan failed. Check the logs for more details."
+          exit 1
+
+
+      - name: Upload Terraform Plan Artifacts
+        if: success()
+        uses: actions/upload-artifact@v3
+        with:
+          name: terraform-plan
+          path: plan.out
+          
+      - name: Create Pull Request
+
 
 
