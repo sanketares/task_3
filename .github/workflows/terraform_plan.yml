@@ -61,6 +61,16 @@ jobs:
           echo "Terraform plan failed. Check the logs for more details."
           exit 1
 
+      - name: Debug Terraform Plan Output
+        run: |
+          if [ -f plan.out ]; then
+            echo "plan.out exists"
+            ls -la plan.out
+          else
+            echo "plan.out does not exist"
+          fi
+
+
 
 
  
