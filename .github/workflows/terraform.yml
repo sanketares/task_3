@@ -65,6 +65,5 @@ jobs:
           base: main
           branch: sanket
           title: 'Terraform Plan Results'
-          body: |
-            This pull request was automatically created after a successful Terraform plan.
+
 
