@@ -61,19 +61,6 @@ jobs:
           echo "Terraform plan failed. Check the logs for more details."
           exit 1
 
-      - name: Create Pull Request
-        if: success() && github.event_name == 'push'
-        uses: devops-infra/action-pull-request@v0.5.1
-        with:
-          target_branch: main
-          title: "Automated PR: Terraform Plan Successful"
-          body: "This pull request was automatically created because the Terraform plan was successful."
-          draft: false
-          get_diff: false
-          ignore_users: dependabot
-          allow_no_diff: false
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
 
  
