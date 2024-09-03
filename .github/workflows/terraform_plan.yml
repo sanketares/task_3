@@ -62,15 +62,16 @@ jobs:
           exit 1
 
       - name: Create Pull Request
-        if: success()
+        if: success() && github.event_name == 'push'
         uses: devops-infra/action-pull-request@v0.5.1
         with:
-          source_branch: ${{ github.ref_name }}
           target_branch: main
-          pr_title: "Automated PR: Terraform Plan Successful"
-          pr_body: |
-            This pull request was automatically created because the Terraform plan was successful.
+          title: "Automated PR: Terraform Plan Successful"
+          body: "This pull request was automatically created because the Terraform plan was successful."
           draft: false
+          get_diff: false
+          ignore_users: dependabot
+          allow_no_diff: false
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
