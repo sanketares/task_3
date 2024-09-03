@@ -43,7 +43,7 @@ jobs:
 
 
       - name: Terraform Plan
-        run: terraform plan
+        run: terraform plan -out=plan.out
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
@@ -55,20 +55,16 @@ jobs:
           name: terraform-plan
           path: plan.out
 
+      - name: List files in the working directory
+        run: ls -la
+
       - name: Check Terraform Plan
         if: failure()
         run: |
           echo "Terraform plan failed. Check the logs for more details."
           exit 1
 
-      - name: Debug Terraform Plan Output
-        run: |
-          if [ -f plan.out ]; then
-            echo "plan.out exists"
-            ls -la plan.out
-          else
-            echo "plan.out does not exist"
-          fi
+     
 
 
 
