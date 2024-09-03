@@ -53,5 +53,4 @@ jobs:
         with:
           name: terraform-plan
           path: plan.out
-          
-      - name: Create Pull Request
+
